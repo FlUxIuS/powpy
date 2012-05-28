@@ -1,0 +1,15 @@
+.. _Security:
+
+Security - Security Class
+================================
+
+.. toctree::
+   :maxdepth: 2
+
+Class that defines a Security Profile (Experimental) which is an inheritance of Machine Class itself.
+
+.. module:: pwplib.profiles.Security
+    :synopsis:  Class that defines a Security Profile
+
+.. autoclass:: Security
+    :members:

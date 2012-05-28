@@ -1,0 +1,220 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The concept of profiles: Example with the Security profile &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-concept-of-profiles-example-with-the-security-profile">
+<span id="securityprofile"></span><h1>The concept of profiles: Example with the Security profile<a class="headerlink" href="#the-concept-of-profiles-example-with-the-security-profile" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
+<p>This little framework has not been designed for IT Security purposes, but can be extended and that is why we provide a <cite>Security</cite> profile.
+We talk about other possibilities offered by WMI to give informations about Windows stations hardening, throught this little Class that requires a lot of work to be
+complete.</p>
+<p>Here is the &#8216;revolutionay vision&#8217; applied to add profiles:</p>
+<img alt="_images/powpySecurity.png" class="align-center" src="_images/powpySecurity.png" />
+<p>Has you can see, it is just an inheritance. The class in the <cite>profiles</cite> directory of <cite>pwplib</cite>.</p>
+</div>
+<div class="section" id="some-functionalities">
+<h2>Some functionalities<a class="headerlink" href="#some-functionalities" title="Permalink to this headline">¶</a></h2>
+<p>Functionalities are not yet completed, but it gives an idea of what we could do.</p>
+<p>First and foremost, we will instantiate a security object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">localhost</span> <span class="o">=</span> <span class="n">Security</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="check-for-data-execution-prevention">
+<h3>Check for Data Execution Prevention<a class="headerlink" href="#check-for-data-execution-prevention" title="Permalink to this headline">¶</a></h3>
+<p>It will be interested interested to see if the feature is available in the targeted operating system, and if it is available for every software or partially.</p>
+<p>To see that, we have the &#8216;perfect&#8217; line:</p>
+<div class="highlight-python"><pre>PPy&gt; localhost.checkforDEP()
+{'DriverDEP': True, 'DEPSupportPolicy': {'Code': 2, 'Description': 'DEP is enabl
+ed for a limited number of binaries, the kernel, and all Windows-based services.
+However, it is off by default for all 32-bit applications. A user or administra
+tor must explicitly choose either the AlwaysOn or the OptOut setting before DEP
+can be applied to 32-bit applications.'}, 'AvailableDEP': True, '32bitDEP': True
+}</pre>
+</div>
+</div>
+<div class="section" id="check-for-encryption-level">
+<h3>Check for Encryption level<a class="headerlink" href="#check-for-encryption-level" title="Permalink to this headline">¶</a></h3>
+<p>For secure transactions, Windows provides data encryption so we can see very easily what the level of this encryption (how much bits):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">getEncryptionLevel</span><span class="p">()</span>
+<span class="mi">256</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-a-list-of-security-updates">
+<h3>Get a list of Security Updates<a class="headerlink" href="#get-a-list-of-security-updates" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>PPy&gt; localhost.getSecurityUpdatesList()
+[{'HotFixID': u'KB982861'}, {'HotFixID': u'982861'}, {'HotFixID': u'KB971033'},
+{'HotFixID': u'KB2032276'}, {'HotFixID': u'KB2079403'}, {'HotFixID': u'KB212097
+'}, {'HotFixID': u'KB2207566'}, {'HotFixID': u'KB2281679'}, {'HotFixID': u'KB22
+[...]</pre>
+</div>
+</div>
+<div class="section" id="get-an-entire-list-of-installed-antiviruses">
+<h3>Get an entire list of installed Antiviruses<a class="headerlink" href="#get-an-entire-list-of-installed-antiviruses" title="Permalink to this headline">¶</a></h3>
+<p>To get a list of Antiviruses installed on the computer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">getAVList</span><span class="p">()</span>
+<span class="p">[{</span><span class="s">&#39;productState&#39;</span><span class="p">:</span> <span class="mi">266240</span><span class="p">,</span> <span class="s">&#39;displayName&#39;</span><span class="p">:</span> <span class="s">u&#39;avast! Antivirus&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature only work for local Windows clients. Could be fixed tricking with Task Scheduler and another class on <cite>cimv2</cite>, but if you have a clean idea let me know =). Use <cite>getExeList</cite> instead.</p>
+</div>
+</div>
+<div class="section" id="get-an-entire-list-of-installed-firewalls">
+<h3>Get an entire list of installed Firewalls<a class="headerlink" href="#get-an-entire-list-of-installed-firewalls" title="Permalink to this headline">¶</a></h3>
+<p>To get a list of Firewalls installed on the computer:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">getFirewallList</span><span class="p">()</span>
+<span class="p">[{</span><span class="s">&#39;productState&#39;</span><span class="p">:</span> <span class="mi">262160</span><span class="p">,</span> <span class="s">&#39;displayName&#39;</span><span class="p">:</span> <span class="s">u&#39;ZoneAlarm Firewall&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature only work for local Windows clients has the previous one (<cite>getAVList</cite>).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A quick post by <a class="reference external" href="http://blog.didierstevens.com/2011/03/21/windows-security-center/">Didier Stevens</a> has been writtend about it. Use <cite>getExeList</cite> instead.</p>
+</div>
+</div>
+<div class="section" id="get-an-entire-list-of-installed-anti-spywares">
+<h3>Get an entire list of installed Anti-Spywares<a class="headerlink" href="#get-an-entire-list-of-installed-anti-spywares" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">getASpyList</span><span class="p">()</span>
+<span class="p">[{</span><span class="s">&#39;productState&#39;</span><span class="p">:</span> <span class="mi">266240</span><span class="p">,</span> <span class="s">&#39;displayName&#39;</span><span class="p">:</span> <span class="s">u&#39;avast! Antivirus&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;productState&#39;</span><span class="p">:</span>
+<span class="mi">397568</span><span class="p">,</span> <span class="s">&#39;displayName&#39;</span><span class="p">:</span> <span class="s">u&#39;Windows Defender&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature only work for local Windows clients has the previous one (<cite>getAVList</cite> and <cite>getFirewallList</cite>). Use <cite>getExeList</cite> instead.</p>
+</div>
+</div>
+<div class="section" id="gimme-some-more">
+<h3>Gimme some more<a class="headerlink" href="#gimme-some-more" title="Permalink to this headline">¶</a></h3>
+<p>There are also others idea to develop in this way for Windows hardening checking, like looking for the current architecture and see if the PAE is enabled (using the registry):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Security</span><span class="p">(</span><span class="n">Machine</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">checkforPAE</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">keyPath</span> <span class="o">=</span> <span class="s">r&quot;SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">OpenKey</span><span class="p">(</span><span class="n">HKEY_LOCAL_MACHINE</span><span class="p">,</span> <span class="n">keyPath</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">QueryValueEx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s">&quot;PhysicalAddressExtension&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>And so on.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The concept of profiles: Example with the Security profile</a><ul>
+<li><a class="reference internal" href="#design">Design</a></li>
+<li><a class="reference internal" href="#some-functionalities">Some functionalities</a><ul>
+<li><a class="reference internal" href="#check-for-data-execution-prevention">Check for Data Execution Prevention</a></li>
+<li><a class="reference internal" href="#check-for-encryption-level">Check for Encryption level</a></li>
+<li><a class="reference internal" href="#get-a-list-of-security-updates">Get a list of Security Updates</a></li>
+<li><a class="reference internal" href="#get-an-entire-list-of-installed-antiviruses">Get an entire list of installed Antiviruses</a></li>
+<li><a class="reference internal" href="#get-an-entire-list-of-installed-firewalls">Get an entire list of installed Firewalls</a></li>
+<li><a class="reference internal" href="#get-an-entire-list-of-installed-anti-spywares">Get an entire list of installed Anti-Spywares</a></li>
+<li><a class="reference internal" href="#gimme-some-more">Gimme some more</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/securityprofile.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

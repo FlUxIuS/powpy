@@ -1,0 +1,15 @@
+.. _Machine:
+
+Machine - Machine Class
+================================
+
+.. toctree::
+   :maxdepth: 2
+
+Machine Class to represent computers in the network giving us a Virtual Access to them.
+
+.. module:: pwplib.Machine
+    :synopsis:  Represent computers in the network
+
+.. autoclass:: Machine
+    :members:

@@ -1,0 +1,28 @@
+.. _prerequisites:
+
+Prerequisites
+==============
+(Tested on Windows XP SP3 and Windows 7)
+
+.. toctree::
+   :maxdepth: 2
+
+Python modules and binds
+-----------------------
+Indeed, as long as it works in Python, we need the Python interepreter installed. This framework as been made for 2.x version of Python, so if you want to install
+Python, download the last 2.x version of this interpreter on `Python's Website <http://www.python.org/download/releases/>`_.
+
+Secondly, there are some modules which require WMI for Python installed, so do not forget to download and install `Python WMI <http://pypi.python.org/pypi/WMI/#downloads>`_.
+
+In some cases, moniker construction could fail. To fix it, you can also install `pywin32 <http://sourceforge.net/projects/pywin32/files/>`_.
+
+WMI permissions
+----------------
+Remote access
+############
+WMI uses DCOM to handle remote calls, and a failure should happened when we want to try any connection to a WMI namespace (Due to a "DCOM Access Denied" error).
+To fix it, we have to grand permissions for a specific user or group in every computers we want to monitor, `as described here <http://msdn.microsoft.com/en-us/library/windows/desktop/aa393266%28v=vs.85%29.aspx>`_. 
+
+Windows Firewall
+################
+Check the configuration to be sure if the traffic for Windows Management Instrumentation is allowed. `Click here to learn more about Windows Firewall Settings <http://sourceforge.net/projects/pywin32/files/>`_.

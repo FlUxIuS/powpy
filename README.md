@@ -1,4 +1,7 @@
 powpy
 =====
 
-Windows Management Instrumentation scripting Framework
+Play with Windows Management Instrumentation in python and replace your creepy PowerShell ;)
+
+http://www.handgrep.se/powpy/doc
+

@@ -1,0 +1,179 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Machine - Machine Class &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="machine-machine-class">
+<span id="machine"></span><h1>Machine - Machine Class<a class="headerlink" href="#machine-machine-class" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Machine Class to represent computers in the network giving us a Virtual Access to them.</p>
+<span class="target" id="module-pwplib.Machine"></span><dl class="class">
+<dt id="pwplib.Machine.Machine">
+<em class="property">class </em><tt class="descclassname">pwplib.Machine.</tt><tt class="descname">Machine</tt><big>(</big><em>connection=None</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Machine Class to represent computers in the network giving us a Virtual Access to them.</p>
+<dl class="method">
+<dt id="pwplib.Machine.Machine.Reboot">
+<tt class="descname">Reboot</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.Reboot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.Reboot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reboot a computer using RemoteShutdown and Win32_OperatingSystem Class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.WQL">
+<tt class="descname">WQL</tt><big>(</big><em>wql</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.WQL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.WQL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a wql query.
+WQL(self, wql) &#8211;&gt;  _wmi_object representations of the results.</p>
+<blockquote>
+<div>wql: should be a string representing the query.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.copytoshare">
+<tt class="descname">copytoshare</tt><big>(</big><em>src</em>, <em>dst</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.copytoshare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.copytoshare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy from localhost source to destination directory.
+src: Source.
+dst: Destination</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.getExeList">
+<tt class="descname">getExeList</tt><big>(</big><em>justpath=False</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.getExeList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.getExeList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of installed executables.
+getExeList() &#8211;&gt; List of installed EXEs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.getMsiList">
+<tt class="descname">getMsiList</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.getMsiList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.getMsiList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a descriptive list of MSI installed programs using WMI Win32_Product Class.
+getMsiList() &#8211;&gt; List of installed MSI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.getOSinformations">
+<tt class="descname">getOSinformations</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.getOSinformations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.getOSinformations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get exta informations about the Operating System</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.installEXE">
+<tt class="descname">installEXE</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.installEXE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.installEXE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install EXE programs.
+installEXE(self, path) &#8211;&gt; state integer.</p>
+<blockquote>
+<div>path: Executable Location (String).</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.installMSI">
+<tt class="descname">installMSI</tt><big>(</big><em>path</em>, <em>AllUsers=False</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.installMSI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.installMSI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install MSI using WMI Win32_Product Class.
+installMSI(self, path, [AllUsers]) &#8211;&gt; state tuple.</p>
+<blockquote>
+<div>path: Package Location (String).
+AllUsers: True or False &#8211;&gt; Install for all users.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Machine.Machine.psExecute">
+<tt class="descname">psExecute</tt><big>(</big><em>cmd</em><big>)</big><a class="reference internal" href="_modules/pwplib/Machine.html#Machine.psExecute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Machine.Machine.psExecute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a process using WMI Win32_Process Class.
+psExecute(self, cmd) &#8211;&gt; state integer</p>
+<blockquote>
+<div>cmd: String representing the process to launch.</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Machine.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

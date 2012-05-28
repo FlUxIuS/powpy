@@ -1,0 +1,48 @@
+.. PowPy documentation master file, created by
+   sphinx-quickstart on Fri Jan 13 13:59:59 2012.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to PowPy's documentation!
+=================================
+
+.. toctree::
+   :maxdepth: 2 
+
+Welcome to PowPy, the revolution of PowerShell but... In Python!
+
+.. image:: popeye.gif
+    :align: center
+   
+This is mainly a small framework to work with `Windows Management Instrumentation <http://msdn.microsoft.com/en-us/library/windows/desktop/aa394582%28v=vs.85%29.aspx>`_ API in local as well as in remote. The library is free to use, and it is firstly provided
+with a python interpreter to script in `freestyle` and monitor your Windows machines in remote.
+
+Read the following documentation to learn more about PowPy.
+
+Have fun!
+
+Motivations
+------------
+There wasn't any motivations in the beginning. Indeed, this project had to be a 4 lines script Windows Management exercise in class, and turned to a `WMI <http://msdn.microsoft.com/en-us/library/windows/desktop/aa394582%28v=vs.85%29.aspx>`_ scripting framework by myself at home (That I didn't want to through in the `garbage <http://www.youtube.com/watch?v=rpRiSb_Ir-s>`_). 
+Since we have python, `COM <http://www.microsoft.com/com/default.mspx>`_ and `WMI <http://msdn.microsoft.com/en-us/library/windows/desktop/aa394582%28v=vs.85%29.aspx>`_, the purpose of this framework is to give an interactive interface for system administrators to manage a local machine as a remote machine, or 
+a set of machines in a specific domain, and so on.
+
+The comparison between PowerShell and PowPy as to be taken with humour. This framework is based on PowerShell concepts, using the WMI API, to script and manage local or remote Windows machines on the fly,
+and only provide few fonctionnalities compared to Powershell (yet! =D).
+
+How to contribute?
+-------------------
+To begin, I have a question to ask: "Is everything alright with you mate?". Secondly we could talk about making tickets and everythink, but for the moment you can
+create an issue to GitHub or contact me also from GitHub or Twitter. I will be happy to let you work on it (to put some 'crazy ideas' in it I guess!).
+
+
+Indices and tables
+==================
+
+* :ref:`prerequisites`
+* :ref:`basics`
+* :ref:`remotemanagement`
+* :ref:`securityprofile`
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

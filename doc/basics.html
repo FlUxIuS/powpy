@@ -1,0 +1,212 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basics &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basics">
+<span id="id1"></span><h1>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
+<p>This part assumes you are aware with <a class="reference internal" href="prerequisites.html#prerequisites"><em>Prerequisites</em></a>. Here, we will talk about few basics in local we will reuse later in remote.</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="the-machine">
+<h2>The Machine<a class="headerlink" href="#the-machine" title="Permalink to this headline">¶</a></h2>
+<p>A specific machine is represented by a Machine Class (<a class="reference internal" href="Machine.html#module-pwplib.Machine" title="pwplib.Machine: Represent computers in the network"><tt class="xref py py-class docutils literal"><span class="pre">pwplib.Machine</span></tt></a>):</p>
+<img alt="_images/powpyMachine.png" class="align-center" src="_images/powpyMachine.png" />
+<p>Actually when launching PowPy, a first machine is initialized: Our machine!</p>
+<div class="highlight-python"><pre>PPy&gt; localhost
+
+Machine [fluxius-windev]
+{
+    type: localhost
+    name: fluxius-windev
+    workgroup: OUFGROUP
+    domain: OUFGROUP
+    ipaddress: (u'192.168.0.3',)
+    macaddress: AC:84:xx:xx:xx:xx
+    &lt;[OperatingSystem]: version="6.1.7600"; name="Microsoft Windows 7 Professionnal"; &gt;
+}</pre>
+</div>
+<p>And as you can see, there are many operationgs that we can perform.</p>
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-list-of-installed-softwares">
+<h3>Get a list of installed softwares<a class="headerlink" href="#get-a-list-of-installed-softwares" title="Permalink to this headline">¶</a></h3>
+<p>Two methods have been implemented to get a list of installed softwares. The first one is <cite>getExeList()</cite> used as follows:</p>
+<div class="highlight-python"><pre>PPy&gt; localhost.getExeList()
+[('Adobe Flash Player 11 Plugin 64-bit', '11.1.102.55'), ('Broadcom 802.11
+...
+']</pre>
+</div>
+<p>The <cite>getExeList()</cite> also includes a paramaters <cite>justpath</cite> to only return execution paths:</p>
+<div class="highlight-python"><pre>PPy&gt; localhost.getExeList(True)
+[u'Acrobat.exe', u'AcrobatInfo.exe', u'AcroDist.exe', u'AcroRd32.exe', u'Adobe A
+...
+']</pre>
+</div>
+<p>The second implementation comes from <a class="reference external" href="http://timgolden.me.uk/python/wmi/tutorial.html">WMI extension for win32com that this framework is using</a> (<cite>getMsiList()</cite>), which gives you only softwares installed with MSI packages:</p>
+<div class="highlight-python"><pre>PPy&gt; localhost.getMsiList()
+[(u'HexEdit', u'3.0.0'), (u'Microsoft Security Assessment Tool 4.0', u'1.0.0'),
+(u'PxMergeModule', u'1.00.0000'), (u'Microsoft Application Error Reporting', u'1
+...
+']</pre>
+</div>
+</div>
+<div class="section" id="execute-a-process">
+<h3>Execute a process<a class="headerlink" href="#execute-a-process" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s call the famous calculator program of windows using <cite>psExecute()</cite> method:</p>
+<img alt="_images/powpyexecCalc.png" class="align-center" src="_images/powpyexecCalc.png" />
+<p>If the process is executed properly, 0 is returned.</p>
+</div>
+<div class="section" id="install-a-software">
+<h3>Install a software<a class="headerlink" href="#install-a-software" title="Permalink to this headline">¶</a></h3>
+<p>Installing a software is very easy. Like <cite>getExeList()</cite> and <cite>getMsiList()</cite>, we have two methods: <cite>installMSI</cite> and <cite>installEXE</cite>.</p>
+<p>Here is an example using <cite>installEXE</cite> specifying its path:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">installEXE</span><span class="p">(</span><span class="s">r&quot;C:\pathto\executable.exe&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The second method <cite>installMSI</cite> is used like <cite>installEXE</cite>, but you can also precise if you want to install the software of all users or not:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">installMSI</span><span class="p">(</span><span class="s">r&quot;C:\pathto\package.msi&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On Windows Vista and Seven for standart users, these methods are blocked by the <a class="reference external" href="http://technet.microsoft.com/fr-fr/library/dd834802.aspx">User Account Control</a>.</p>
+</div>
+<p>There are many ways to bypass it</p>
+</div>
+</div>
+<div class="section" id="copy-files">
+<h2>Copy files<a class="headerlink" href="#copy-files" title="Permalink to this headline">¶</a></h2>
+<p>To copy files from a source to a destination we can perform this operations:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">localhost</span><span class="o">.</span><span class="n">copy2share</span><span class="p">(</span><span class="s">r&quot;C:\pathto\source.ext&quot;</span><span class="p">,</span> <span class="s">r&quot;C:\pathto\destination.ext&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will see after in the Network part its logic, to see how a file can be copied from a computer to another. This method is to be evolved for network purposes.</p>
+</div>
+<div class="section" id="wmi-query-language-be-creative">
+<h2>WMI Query Language: Be creative!<a class="headerlink" href="#wmi-query-language-be-creative" title="Permalink to this headline">¶</a></h2>
+<p>If you use <a class="reference external" href="http://www.wmiexplorer.com">WMI Explorer</a>, you could see there are a lot of classes, even not implemented here:</p>
+<img alt="_images/WMIexplorer.png" class="align-center" src="_images/WMIexplorer.png" />
+<p>With PowPy for non-implemented methods, there is a solution: the use of <cite>WQL()</cite>&#8216;s method</p>
+<div class="highlight-python"><pre>PPy&gt; volumes = localhost.WQL("Select * From Win32_Volume")
+PPy&gt; for volume in volumes:
+...     print volume.BlockSize, volume.FileSystem
+...
+4096 NTFS
+4096 NTFS</pre>
+</div>
+</div>
+</div>
+<div class="section" id="next-remote-management">
+<h1>Next: Remote Management<a class="headerlink" href="#next-remote-management" title="Permalink to this headline">¶</a></h1>
+<p>See <a class="reference internal" href="remotemanagement.html#remotemanagement"><em>Remote management</em></a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basics</a><ul>
+<li><a class="reference internal" href="#the-machine">The Machine</a></li>
+<li><a class="reference internal" href="#operations">Operations</a><ul>
+<li><a class="reference internal" href="#get-a-list-of-installed-softwares">Get a list of installed softwares</a></li>
+<li><a class="reference internal" href="#execute-a-process">Execute a process</a></li>
+<li><a class="reference internal" href="#install-a-software">Install a software</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#copy-files">Copy files</a></li>
+<li><a class="reference internal" href="#wmi-query-language-be-creative">WMI Query Language: Be creative!</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next-remote-management">Next: Remote Management</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/basics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

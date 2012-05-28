@@ -1,0 +1,134 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Prerequisites &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="prerequisites">
+<span id="id1"></span><h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>(Tested on Windows XP SP3 and Windows 7)</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="python-modules-and-binds">
+<h2>Python modules and binds<a class="headerlink" href="#python-modules-and-binds" title="Permalink to this headline">¶</a></h2>
+<p>Indeed, as long as it works in Python, we need the Python interepreter installed. This framework as been made for 2.x version of Python, so if you want to install
+Python, download the last 2.x version of this interpreter on <a class="reference external" href="http://www.python.org/download/releases/">Python&#8217;s Website</a>.</p>
+<p>Secondly, there are some modules which require WMI for Python installed, so do not forget to download and install <a class="reference external" href="http://pypi.python.org/pypi/WMI/#downloads">Python WMI</a>.</p>
+<p>In some cases, moniker construction could fail. To fix it, you can also install <a class="reference external" href="http://sourceforge.net/projects/pywin32/files/">pywin32</a>.</p>
+</div>
+<div class="section" id="wmi-permissions">
+<h2>WMI permissions<a class="headerlink" href="#wmi-permissions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="remote-access">
+<h3>Remote access<a class="headerlink" href="#remote-access" title="Permalink to this headline">¶</a></h3>
+<p>WMI uses DCOM to handle remote calls, and a failure should happened when we want to try any connection to a WMI namespace (Due to a &#8220;DCOM Access Denied&#8221; error).
+To fix it, we have to grand permissions for a specific user or group in every computers we want to monitor, <a class="reference external" href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa393266%28v=vs.85%29.aspx">as described here</a>.</p>
+</div>
+<div class="section" id="windows-firewall">
+<h3>Windows Firewall<a class="headerlink" href="#windows-firewall" title="Permalink to this headline">¶</a></h3>
+<p>Check the configuration to be sure if the traffic for Windows Management Instrumentation is allowed. <a class="reference external" href="http://sourceforge.net/projects/pywin32/files/">Click here to learn more about Windows Firewall Settings</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Prerequisites</a><ul>
+<li><a class="reference internal" href="#python-modules-and-binds">Python modules and binds</a></li>
+<li><a class="reference internal" href="#wmi-permissions">WMI permissions</a><ul>
+<li><a class="reference internal" href="#remote-access">Remote access</a></li>
+<li><a class="reference internal" href="#windows-firewall">Windows Firewall</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/prerequisites.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

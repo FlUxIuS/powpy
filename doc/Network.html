@@ -1,0 +1,134 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Network - Network Class &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="network-network-class">
+<span id="network"></span><h1>Network - Network Class<a class="headerlink" href="#network-network-class" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>Network Class to represent domains or/and workgroups.</p>
+<span class="target" id="module-pwplib.Network"></span><dl class="class">
+<dt id="pwplib.Network.Network">
+<em class="property">class </em><tt class="descclassname">pwplib.Network.</tt><tt class="descname">Network</tt><big>(</big><em>domain</em>, <em>protocole='WinNT'</em><big>)</big><a class="reference internal" href="_modules/pwplib/Network.html#Network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Network.Network" title="Permalink to this definition">¶</a></dt>
+<dd><p>Network Class to represent domains or/and workgroups</p>
+<dl class="classmethod">
+<dt id="pwplib.Network.Network.connectTo">
+<em class="property">classmethod </em><tt class="descname">connectTo</tt><big>(</big><em>server</em>, <em>user=''</em>, <em>password=''</em>, <em>impersonation_level='Impersonate'</em>, <em>namespace=''</em><big>)</big><a class="reference internal" href="_modules/pwplib/Network.html#Network.connectTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Network.Network.connectTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect to a remote server
+connectTo(server, [user], [password], [impersonation_level], [namespace]) &#8211;&gt; COMObject Instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Network.Network.countPC">
+<tt class="descname">countPC</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Network.html#Network.countPC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Network.Network.countPC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of discovered computers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Network.Network.discovery">
+<tt class="descname">discovery</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Network.html#Network.discovery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Network.Network.discovery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discover computers which are from the same Group/Domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pwplib.Network.Network.getComputersList">
+<tt class="descname">getComputersList</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/pwplib/Network.html#Network.getComputersList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pwplib.Network.Network.getComputersList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the entire list of discovered computers.
+getComputersList() &#8211;&gt; List of computers</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Network.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

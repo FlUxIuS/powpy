@@ -1,0 +1,173 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Remote management &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="remote-management">
+<span id="remotemanagement"></span><h1>Remote management<a class="headerlink" href="#remote-management" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>If you have finished with <a class="reference internal" href="basics.html#basics"><em>Basics</em></a>, here things get serious now. Indeed, this chapter illustrate the Network Class which is also fully designed with WMI stuffs.
+Let&#8217;s begin with a small instroduction of the Network Class first.</p>
+<div class="section" id="the-network-class">
+<h2>The Network Class<a class="headerlink" href="#the-network-class" title="Permalink to this headline">¶</a></h2>
+<p>The network is represented by a class : Network</p>
+<img alt="_images/powpyNetwork.png" class="align-center" src="_images/powpyNetwork.png" />
+</div>
+<div class="section" id="discover-other-machines">
+<h2>Discover other machines<a class="headerlink" href="#discover-other-machines" title="Permalink to this headline">¶</a></h2>
+<p>To discover other Windows machines around, we need to instantiate a new object <cite>Network</cite> and use it&#8217;s method <cite>discover()</cite> that will take care of the rest:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PPy</span><span class="o">&gt;</span> <span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">localhost</span><span class="o">.</span><span class="n">workgroup</span><span class="p">)</span>
+<span class="n">PPy</span><span class="o">&gt;</span> <span class="n">net</span><span class="o">.</span><span class="n">discovery</span><span class="p">()</span>
+<span class="p">[</span><span class="s">u&#39;FLUXIUS-WINDEV&#39;</span><span class="p">,</span> <span class="s">u&#39;WIN-MANAO&#39;</span><span class="p">]</span>
+<span class="n">PPy</span><span class="o">&gt;</span> <span class="n">net</span><span class="o">.</span><span class="n">getComputersList</span><span class="p">()</span>
+<span class="p">[</span><span class="s">u&#39;FLUXIUS-WINDEV&#39;</span><span class="p">,</span> <span class="s">u&#39;WIN-MANAO&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Has you can see, it is also possible to retrieve the list at any moment with the method <cite>getComputersList()</cite>.</p>
+</div>
+<div class="section" id="connecting-to-another-machine">
+<h2>Connecting to another machine<a class="headerlink" href="#connecting-to-another-machine" title="Permalink to this headline">¶</a></h2>
+<p>Connecting to another machine is very simple</p>
+<div class="highlight-python"><pre>PPy&gt; hmachine2 = Network(localhost.domain).connectTo("WIN-MANAO")
+Connecting to 'WIN-MANAO'
+Username: fluxius
+Password:
+PPy&gt; machine2 = Machine(hmachine2)</pre>
+</div>
+<p>If you display machine2&#8217;s informations, you could see by yourself that this object correspond to <cite>WIN-MANAO</cite></p>
+<div class="highlight-python"><pre>PPy&gt; machine2
+Machine [WIN-MANAO]
+{
+    type: computer
+    name: WIN-MANAO
+    workgroup: OUFGROUP
+    domain: OUFGROUP
+    ipaddress: (u'192.168.233.139', u'fe90::xxxx:xxxx:xxxx:xxxx')
+    macaddress: 00:0C:xx:xx:xx:xx
+    &lt;[OperatingSystem]: version="6.1.7601"; name="Microsoft Windows 7 Professionnel "; &gt;
+}</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For each connection, you will be asked to write logins informations. To avoid it, use <cite>username</cite> and <cite>password</cite> parameters in the method <cite>connectTo</cite> (<tt class="xref py py-func docutils literal"><span class="pre">pwplib.Network.connectTo()</span></tt>).</p>
+</div>
+</div>
+<div class="section" id="what-is-next">
+<h2>What is next?<a class="headerlink" href="#what-is-next" title="Permalink to this headline">¶</a></h2>
+<p>If you have followed <a class="reference internal" href="basics.html#basics"><em>Basics</em></a> page, you have nothing to know more about management tools implemented in this framework yet. Indeed, methods from machine2 are the same
+as in localhost, for example:</p>
+<div class="highlight-python"><pre>PPy&gt; machine2.getExeList()
+[(u'AddressBook',), (u'Connection Manager',), (u'DirectDrawEx',), (u'DXM_Runtime
+',), (u'Fontcore',), (u'IE40',), (u'IE4Data',), (u'IE5BAKEX',), (u'IEData',), ...
+...</pre>
+</div>
+</div>
+</div>
+<div class="section" id="next">
+<h1>Next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h1>
+<p>See the <a class="reference internal" href="securityprofile.html#securityprofile"><em>The concept of profiles: Example with the Security profile</em></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Remote management</a><ul>
+<li><a class="reference internal" href="#the-network-class">The Network Class</a></li>
+<li><a class="reference internal" href="#discover-other-machines">Discover other machines</a></li>
+<li><a class="reference internal" href="#connecting-to-another-machine">Connecting to another machine</a></li>
+<li><a class="reference internal" href="#what-is-next">What is next?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#next">Next</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/remotemanagement.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PowPy 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

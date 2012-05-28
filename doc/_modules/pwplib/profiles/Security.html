@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pwplib.profiles.Security &mdash; PowPy 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="PowPy 1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">PowPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pwplib.profiles.Security</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">wmi</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">platform</span>
+<span class="kn">from</span> <span class="nn">pwplib.Machine</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pwplib.OperatingSystem</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="Security"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security">[docs]</a><span class="k">class</span> <span class="nc">Security</span><span class="p">(</span><span class="n">Machine</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Security Profile example --&gt; to be extended ;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__c2</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># security machine wmi handle</span>
+    <span class="n">__c3</span> <span class="o">=</span> <span class="bp">None</span> <span class="c"># security machine wmi handle2</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Initialize a new Machine object, gathering few informations for its description.</span>
+<span class="sd">            connection: handle to a remote server (returned by connect_server method from WMI).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Machine</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__c2</span> <span class="o">=</span> <span class="n">wmi</span><span class="o">.</span><span class="n">WMI</span><span class="p">(</span><span class="n">wmi</span><span class="o">=</span><span class="n">connection</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">r&quot;root\SecurityCenter&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__c3</span> <span class="o">=</span> <span class="n">wmi</span><span class="o">.</span><span class="n">WMI</span><span class="p">(</span><span class="n">wmi</span><span class="o">=</span><span class="n">connection</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">r&quot;root\SecurityCenter2&quot;</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="Security.WQLsec"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.WQLsec">[docs]</a>    <span class="k">def</span> <span class="nf">WQLsec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wql</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Performs a wql query from SecurityCenter&#39;s namespace.</span>
+<span class="sd">            WQLsec(self, wql) --&gt;  _wmi_object representations of the results.</span>
+<span class="sd">            </span>
+<span class="sd">                wql: should be a string representing the query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__c2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__c2</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">wql</span><span class="p">))</span> <span class="c"># The first element of the tuple show which handle we are using to get the result</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># if the result is empty we look to the second namespace</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__c3</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">wql</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Security.checkforDEP"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.checkforDEP">[docs]</a>    <span class="k">def</span> <span class="nf">checkforDEP</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Few assesments that perform a DEP security check (32bit apps, Drivers, availability, and so on)</span>
+<span class="sd">            more infos: http://msdn.microsoft.com/en-us/library/windows/desktop/aa394239%28v=vs.85%29.aspx</span>
+<span class="sd">            </span>
+<span class="sd">                Returns: Definitions of machine&#39;s DEP states</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">defs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">osinfo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQL</span><span class="p">(</span><span class="s">&quot;Select * From Win32_OperatingSystem&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">defs</span><span class="p">[</span><span class="s">&quot;DriverDEP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">osinfo</span><span class="o">.</span><span class="n">DataExecutionPrevention_Drivers</span>
+        <span class="n">defs</span><span class="p">[</span><span class="s">&quot;AvailableDEP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">osinfo</span><span class="o">.</span><span class="n">DataExecutionPrevention_Available</span>
+        <span class="n">defs</span><span class="p">[</span><span class="s">&quot;32bitDEP&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">osinfo</span><span class="o">.</span><span class="n">DataExecutionPrevention_32BitApplications</span>
+        <span class="n">support</span> <span class="o">=</span> <span class="n">osinfo</span><span class="o">.</span><span class="n">DataExecutionPrevention_SupportPolicy</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">support</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;DEP is turned off for all 32-bit applications on the computer with no exceptions. This setting is not available for the user interface.&quot;</span>
+        <span class="k">elif</span> <span class="n">support</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;DEP is enabled for all 32-bit applications on the computer. This setting is not available for the user interface.&quot;</span>
+        <span class="k">elif</span> <span class="n">support</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;DEP is enabled for a limited number of binaries, the kernel, and all Windows-based services. However, it is off by default for all 32-bit applications. A user or administrator must explicitly choose either the AlwaysOn or the OptOut setting before DEP can be applied to 32-bit applications.&quot;</span>
+        <span class="k">elif</span> <span class="n">support</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;DEP is enabled by default for all 32-bit applications. A user or administrator can explicitly remove support for a 32-bit application by adding the application to an exceptions list.&quot;</span>
+        <span class="n">defs</span><span class="p">[</span><span class="s">&quot;DEPSupportPolicy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Code&quot;</span><span class="p">:</span><span class="n">support</span><span class="p">,</span> <span class="s">&quot;Description&quot;</span><span class="p">:</span><span class="n">description</span><span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">defs</span>
+        </div>
+<div class="viewcode-block" id="Security.getEncryptionLevel"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.getEncryptionLevel">[docs]</a>    <span class="k">def</span> <span class="nf">getEncryptionLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the encryption level used for transactions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">osinfo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQL</span><span class="p">(</span><span class="s">&quot;Select * From Win32_OperatingSystem&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">osinfo</span><span class="o">.</span><span class="n">EncryptionLevel</span>
+        </div>
+<div class="viewcode-block" id="Security.getSecurityUpdatesList"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.getSecurityUpdatesList">[docs]</a>    <span class="k">def</span> <span class="nf">getSecurityUpdatesList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Returns the list of Installed QuickFixes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">quickfixes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQL</span><span class="p">(</span><span class="s">&quot;Select * from Win32_QuickFixEngineering&quot;</span><span class="p">)</span> <span class="c"># Search for QuickFixes</span>
+        <span class="k">for</span> <span class="n">quickfixe</span> <span class="ow">in</span> <span class="n">quickfixes</span><span class="p">:</span>
+            <span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;HotFixID&#39;</span><span class="p">:</span><span class="n">quickfixe</span><span class="o">.</span><span class="n">HotFixID</span><span class="p">})</span>
+        <span class="k">return</span> <span class="nb">list</span>
+    </div>
+<div class="viewcode-block" id="Security.getAVList"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.getAVList">[docs]</a>    <span class="k">def</span> <span class="nf">getAVList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the list of installed Antiviruses</span>
+<span class="sd">            </span>
+<span class="sd">                getAVList() --&gt; List of Antiviruses with properties</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nhandle</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQLsec</span><span class="p">(</span><span class="s">&quot;Select * from AntivirusProduct&quot;</span><span class="p">)</span>
+        <span class="n">glist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">defs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">nhandle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;comanyName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">companyName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;onAccessScanningEnabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">onAccessScanningEnabled</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;productUptoDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">productUptoDate</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;versionNumber&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">versionNumber</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;productState&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">productState</span>
+            <span class="n">glist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">glist</span>
+        </div>
+<div class="viewcode-block" id="Security.getFirewallList"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.getFirewallList">[docs]</a>    <span class="k">def</span> <span class="nf">getFirewallList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the list of installed Firewall(s)</span>
+<span class="sd">            </span>
+<span class="sd">                getFirewallist() --&gt; List of Firewall(s) with properties</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nhandle</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQLsec</span><span class="p">(</span><span class="s">&quot;Select * from FirewallProduct&quot;</span><span class="p">)</span>
+        <span class="n">glist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">defs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">nhandle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;comanyName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">companyName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">enabled</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;versionNumber&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">versionNumber</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;productState&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">productState</span>
+            <span class="n">glist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">glist</span>
+        </div>
+<div class="viewcode-block" id="Security.getASpyList"><a class="viewcode-back" href="../../../Security.html#pwplib.profiles.Security.Security.getASpyList">[docs]</a>    <span class="k">def</span> <span class="nf">getASpyList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the list of installed Anti-Spywares</span>
+<span class="sd">            </span>
+<span class="sd">                getASpyList() --&gt; List of Anti-Spywares with properties</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nhandle</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">WQLsec</span><span class="p">(</span><span class="s">&quot;Select * from AntiSpywareProduct&quot;</span><span class="p">)</span>
+        <span class="n">glist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">defs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">nhandle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;comanyName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">companyName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">productEnabled</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;displayName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">displayName</span>
+                <span class="n">defs</span><span class="p">[</span><span class="s">&quot;productState&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">productState</span>
+            <span class="n">glist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">glist</span>
+</div>
+    <span class="k">def</span> <span class="nf">checkforPAE</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">keyPath</span> <span class="o">=</span> <span class="s">r&quot;SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management&quot;</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">OpenKey</span><span class="p">(</span><span class="n">HKEY_LOCAL_MACHINE</span><span class="p">,</span> <span class="n">keyPath</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">QueryValueEx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s">&quot;PhysicalAddressExtension&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">PowPy 1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Sebastien Dudek.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+.. _Network:
+
+Network - Network Class
+================================
+
+.. toctree::
+   :maxdepth: 2
+
+Network Class to represent domains or/and workgroups.
+
+.. module:: pwplib.Network
+    :synopsis: Represent domains or/and workgroups.
+
+.. autoclass:: Network
+    :members:

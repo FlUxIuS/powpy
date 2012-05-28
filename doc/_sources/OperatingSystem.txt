@@ -1,0 +1,15 @@
+.. _OperatingSystem:
+
+OperatingSystem
+================================
+
+.. toctree::
+   :maxdepth: 2
+
+Machine Class to represent operating on a given machine.
+
+.. module:: pwplib.OperatingSystem
+    :synopsis:  Representation Class of an OS on a given machine
+
+.. autoclass:: OperatingSystem
+    :members:
